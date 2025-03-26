@@ -48,3 +48,6 @@ docs/_build
 
 # Tests
 tests/dev-database.sqlite3
+
+# Tox
+.python-version
