@@ -12,8 +12,8 @@ from functools import wraps
 
 import nexus
 from django.conf import settings
-from django.conf.urls import url
 from django.http import HttpResponse, HttpResponseNotFound
+from django.urls import re_path
 
 from gargoyle import gargoyle, signals
 from gargoyle.conditions import ValidationError
@@ -75,13 +75,13 @@ class GargoyleModule(nexus.NexusModule):
 
     def get_urls(self):
         return [
-            url(r'^add/$', self.as_view(self.add), name='add'),
-            url(r'^update/$', self.as_view(self.update), name='update'),
-            url(r'^delete/$', self.as_view(self.delete), name='delete'),
-            url(r'^status/$', self.as_view(self.status), name='status'),
-            url(r'^conditions/add/$', self.as_view(self.add_condition), name='add-condition'),
-            url(r'^conditions/remove/$', self.as_view(self.remove_condition), name='remove-condition'),
-            url(r'^$', self.as_view(self.index), name='index'),
+            re_path(r'^add/$', self.as_view(self.add), name='add'),
+            re_path(r'^update/$', self.as_view(self.update), name='update'),
+            re_path(r'^delete/$', self.as_view(self.delete), name='delete'),
+            re_path(r'^status/$', self.as_view(self.status), name='status'),
+            re_path(r'^conditions/add/$', self.as_view(self.add_condition), name='add-condition'),
+            re_path(r'^conditions/remove/$', self.as_view(self.remove_condition), name='remove-condition'),
+            re_path(r'^$', self.as_view(self.index), name='index'),
         ]
 
     def render_on_dashboard(self, request):

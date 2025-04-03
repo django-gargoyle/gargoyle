@@ -10,8 +10,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 from django.conf import settings
 from django.db import models
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
-from jsonfield import JSONField
+from django.utils.translation import gettext_lazy as _
 
 from .constants import DISABLED, EXCLUDE, GLOBAL, INCLUDE, INHERIT, SELECTIVE
 
@@ -45,7 +44,7 @@ class Switch(models.Model):
     }
 
     key = models.CharField(max_length=64, primary_key=True)
-    value = JSONField()
+    value = models.JSONField(default=dict)
     label = models.CharField(max_length=64, null=True)
     date_created = models.DateTimeField(default=now)
     date_modified = models.DateTimeField(auto_now=True)
