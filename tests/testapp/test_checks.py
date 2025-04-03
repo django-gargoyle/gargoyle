@@ -9,6 +9,8 @@ from gargoyle.constants import GLOBAL
 
 
 class CheckSwitchDefaultsTests(SimpleTestCase):
+    databases = {'default'}
+
     def test_empty_fine(self):
         with override_settings(GARGOYLE_SWITCH_DEFAULTS={}):
             errors = check_switch_defaults([])
