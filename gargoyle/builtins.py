@@ -9,7 +9,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import socket
 import struct
-from datetime import datetime
+from datetime import datetime, timezone as dt_timezone
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -128,7 +128,7 @@ class UTCTodayConditionSet(ConditionSet):
         return instance is None
 
     def get_field_value(self, instance, field_name):
-        return datetime.utcnow()
+        return datetime.now(dt_timezone.utc)
 
     def get_group_label(self):
         return 'Today'

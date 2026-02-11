@@ -11,7 +11,7 @@ from django.utils.module_loading import autodiscover_modules
 
 from gargoyle.manager import gargoyle
 
-__version__ = '2.1.2'
+__version__ = '2.1.3'
 VERSION = __version__  # old version compat
 
 __all__ = ('gargoyle', 'autodiscover', '__version__', 'VERSION')
