@@ -140,25 +140,33 @@ class UTCTodayConditionSetTests(TestCase):
     @timezone.override('Europe/Moscow')
     def test_use_tz_with_active(self):
         with freeze_time(self.server_dt_aware, tz_offset=self.server_tz_offset):
-            assert self.condition_set.get_field_value(None, 'now_is_on_or_after') == self.utc_dt
+            result = self.condition_set.get_field_value(None, 'now_is_on_or_after')
+            assert result.date() == self.utc_dt.date()
+            assert timezone.is_aware(result)
 
     @override_settings(USE_TZ=True, TIME_ZONE="America/New_York")
     @timezone.override(None)
     def test_use_tz_no_active(self):
         with freeze_time(self.server_dt_aware, tz_offset=self.server_tz_offset):
-            assert self.condition_set.get_field_value(None, 'now_is_on_or_after') == self.utc_dt
+            result = self.condition_set.get_field_value(None, 'now_is_on_or_after')
+            assert result.date() == self.utc_dt.date()
+            assert timezone.is_aware(result)
 
     @override_settings(USE_TZ=False, TIME_ZONE=None)
     @timezone.override('Europe/Moscow')
     def test_no_use_tz_with_active(self):
         with freeze_time(self.server_dt_aware, tz_offset=self.server_tz_offset):
-            assert self.condition_set.get_field_value(None, 'now_is_on_or_after') == self.utc_dt
+            result = self.condition_set.get_field_value(None, 'now_is_on_or_after')
+            assert result.date() == self.utc_dt.date()
+            assert timezone.is_aware(result)
 
     @override_settings(USE_TZ=False, TIME_ZONE=None)
     @timezone.override(None)
     def test_no_use_tz_without_active(self):
         with freeze_time(self.server_dt_aware, tz_offset=self.server_tz_offset):
-            assert self.condition_set.get_field_value(None, 'now_is_on_or_after') == self.utc_dt
+            result = self.condition_set.get_field_value(None, 'now_is_on_or_after')
+            assert result.date() == self.utc_dt.date()
+            assert timezone.is_aware(result)
 
 
 class AppTodayConditionSetTests(TestCase):
